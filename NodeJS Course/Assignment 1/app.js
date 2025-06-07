@@ -8,6 +8,11 @@ const server = http.createServer((req, res) => {
         res.write("<head><title> Assignment 1 </title></head>");
         res.write("<body>");
         res.write("<h1> Hello, I am Vyom Singhal and I am solving Assignment 1! </h1>");
+        res.write('<form action="/create-users" method="POST">');
+        res.write("<label> Username: </label>");
+        res.write('<input type="text" name="username"><br>');
+        res.write('<button type="submit">SEND</button>')
+        res.write("</form>");
         res.write("</body>");
         res.write("</html>");
         return res.end();
