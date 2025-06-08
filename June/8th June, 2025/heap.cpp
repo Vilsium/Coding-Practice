@@ -65,12 +65,22 @@ void heapify(int arr[], int size, int index) {
     int leftChildIndex = 2 * index;
     int rightChildIndex = 2 * index + 1;
 
-    if(leftChildIndex < size && arr[index] < arr[leftChildIndex]) largest = leftChildIndex;
-    if(rightChildIndex < size && arr[index] < arr[rightChildIndex]) largest = rightChildIndex;
+    if(leftChildIndex <= size && arr[index] < arr[leftChildIndex]) largest = leftChildIndex;
+    if(rightChildIndex <= size && arr[index] < arr[rightChildIndex]) largest = rightChildIndex;
 
     if(largest != index) {
         swap(arr[largest], arr[index]);
         heapify(arr, size, largest);
+    }
+}
+
+//heap sort
+void heapSort(int arr[], int size) {
+    int heapSize = size;
+    while(heapSize > 1) {
+        swap(arr[heapSize], arr[1]);
+        heapSize--;
+        heapify(arr, heapSize, 1);
     }
 }
 
@@ -93,6 +103,13 @@ int main() {
     }
 
     cout << "Array after heapifying: ";
+    for(int i = 1;i <= n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    heapSort(arr, n);
+    cout << "Array after sorting: ";
     for(int i = 1;i <= n; i++) {
         cout << arr[i] << " ";
     }
