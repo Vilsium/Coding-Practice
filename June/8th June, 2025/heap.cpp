@@ -1,5 +1,5 @@
 // Learning Heap in cpp
-// Making a heap using array from scratch
+// Making a max-heap using array from scratch
 
 #include <iostream>
 using namespace std;
@@ -16,7 +16,7 @@ public:
     }
 
     void insert(int val) {
-        size = size + 1;
+        size++;
         int index = size;
         arr[index] = val;
         while(index > 1) {
@@ -28,10 +28,35 @@ public:
         }
     }
 
+    //delete root node from the max-heap
+    void deleteRoot() {
+        if(size == 0) {
+            cout << "No elements to delete";
+            return ;
+        }
+
+        swap(arr[1], arr[size]);
+        size--;
+        int index = 1;
+        while(index < size) {
+            int leftChildIndex = 2*index;
+            int rightChildIndex = 2*index + 1;
+            
+            if(leftChildIndex < size && arr[index] < arr[leftChildIndex]) {
+                swap(arr[index], arr[leftChildIndex]);
+                index = leftChildIndex;
+            } else if(rightChildIndex < size && arr[index] < arr[rightChildIndex]) {
+                swap(arr[index], arr[rightChildIndex]);
+                index = rightChildIndex;
+            } else return ;
+        }
+    }
+
     void print() {
         for(int i = 1; i <= size; i++) {
             cout << arr[i] << " ";
         }
+        cout << endl;
     }
 };
 
@@ -42,5 +67,8 @@ int main() {
     hp.insert(53);
     hp.insert(52);
     hp.insert(54);
+    hp.print();
+
+    hp.deleteRoot();
     hp.print();
 }
