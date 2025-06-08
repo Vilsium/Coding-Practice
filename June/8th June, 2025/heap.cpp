@@ -2,6 +2,7 @@
 // Making a max-heap using array from scratch
 
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class heap {
@@ -113,4 +114,30 @@ int main() {
     for(int i = 1;i <= n; i++) {
         cout << arr[i] << " ";
     }
+    cout << endl;
+
+    //Using Priority Queue (include queue for it)
+    priority_queue<int> pq; //Max-Heap
+    priority_queue<int, vector<int>, greater<int>> minHeap; //Min-Heap
+
+    pq.push(4);
+    pq.push(3);
+    pq.push(5);
+    pq.push(2);
+
+    minHeap.push(4);
+    minHeap.push(3);
+    minHeap.push(5);
+    minHeap.push(2);
+
+    cout << "Element at top of pq : " << pq.top() << endl;
+    pq.pop();
+    cout << "Element at top of pq : " << pq.top() << endl;
+    cout << "Size of pq : " << pq.size() << endl;
+    if(!pq.empty()) cout << "There are still elements in pq" << endl;
+
+    cout << "Element at top of minHeap : " << minHeap.top() << endl;
+    minHeap.pop();
+    cout << "Element at top of minHeap : " << minHeap.top() << endl;
+    cout << "Size of minHeap : " << minHeap.size() << endl;
 }
