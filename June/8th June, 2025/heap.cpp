@@ -60,6 +60,20 @@ public:
     }
 };
 
+void heapify(int arr[], int size, int index) {
+    int largest = index;
+    int leftChildIndex = 2 * index;
+    int rightChildIndex = 2 * index + 1;
+
+    if(leftChildIndex < size && arr[index] < arr[leftChildIndex]) largest = leftChildIndex;
+    if(rightChildIndex < size && arr[index] < arr[rightChildIndex]) largest = rightChildIndex;
+
+    if(largest != index) {
+        swap(arr[largest], arr[index]);
+        heapify(arr, size, largest);
+    }
+}
+
 int main() {
     heap hp;
     hp.insert(50);
@@ -71,4 +85,15 @@ int main() {
 
     hp.deleteRoot();
     hp.print();
+
+    int arr[6] = {-1, 54, 53, 55, 52, 50};
+    int n = 5;
+    for(int i = n/2; i > 0; i--) {
+        heapify(arr, n, i);
+    }
+
+    cout << "Array after heapifying: ";
+    for(int i = 1;i <= n; i++) {
+        cout << arr[i] << " ";
+    }
 }
