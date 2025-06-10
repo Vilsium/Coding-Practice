@@ -7,5 +7,3 @@
 2. Create an Express.js app which funnels the request through 2 middleware functions that log something to the console and return one response
 
 3. Handle request to `'/'` and `'/users'` such that each request only has one handler/middleware that does something with it (e.g. send dummy response)
-
-4. Add the `'/create-user'` route and parse the incoming data ("username") and log it to the console.
