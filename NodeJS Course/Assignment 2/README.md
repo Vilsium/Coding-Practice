@@ -1,4 +1,4 @@
-# Assignment 1 of NodeJS Course
+# Assignment 2 of NodeJS Course
 
 ### Tasks to perform
 
