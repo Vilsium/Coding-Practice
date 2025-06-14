@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+app.set("view engine", "pug") // Telling express to use pug as the rendering engine whenever it is to be used
+
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
