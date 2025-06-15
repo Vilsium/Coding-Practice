@@ -18,7 +18,9 @@ block content
                             h2.product__price $#{product.price}
                             p.product__description #{product.description}
                         .card__actions
-                            button.btn Edit Product
-                            button.btn Delete Product
+                            //- button.btn Edit Product
+                            //- button.btn Delete Product
+                            a(href="/admin/edit-product").btn Edit Product
+                            a(href="/admin/delete-product").btn Delete Product
         else
             h1 No Products
