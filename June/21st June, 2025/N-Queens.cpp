@@ -43,7 +43,6 @@ public:
     vector<vector<string>> solveNQueens(int n) {
         vector<string> board(n, string(n, '.'));
         vector<vector<string>> answer;
-        vector<string> soln;
         solve(board, n, answer, 0);
         return answer;
     }
