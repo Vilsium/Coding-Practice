@@ -18,30 +18,45 @@ You may assume the two numbers do not contain any leading zero, except the numbe
  */
 class Solution {
 private:
-    ListNode* reverseList(ListNode* head) {
-        ListNode* curr = head;
-        ListNode* prev = NULL;
-        while(curr) {
-            ListNode* next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
+    int getLength(ListNode* head) {
+        int result = 0;
+        while(head) {
+            result++;
+            head = head->next;
         }
-        return prev;
+        return result;
     }
-    ListNode* addLists(ListNode* head1, ListNode* head2, int carry) {
-        if(!head1 && !head2 && carry == 0) return nullptr;
+    ListNode* pad(ListNode* head, int qty) {
+        while(qty--) {
+            ListNode* temp = new ListNode(0, head);
+            head = temp;
+        }
+        return head;
+    }
+    void addLists(ListNode* head1, ListNode* head2, int& carry, ListNode*& result) {
+        if(!head1 && !head2 && carry == 0) return ;
+        ListNode* newNode = nullptr;
+        addLists(head1 ? head1->next : nullptr, head2 ? head2->next : nullptr, carry, newNode);
         int total = (head1 != nullptr ? head1->val : 0) + (head2 != nullptr ? head2->val : 0) + carry;
         carry = total/10;
-        ListNode* newNode = new ListNode(total%10);
-        newNode->next = addLists(head1 ? head1->next : nullptr, head2 ? head2->next : nullptr, carry);
-        return newNode;
+        result = new ListNode(total%10);
+        result->next = newNode;
     }
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        l1 = reverseList(l1);
-        l2 = reverseList(l2);
-        ListNode* answer = reverseList(addLists(l1, l2, 0));
+        // l1 = reverseList(l1);
+        // l2 = reverseList(l2);
+        int n1 = getLength(l1);
+        int n2 = getLength(l2);
+        if(n1 < n2) l1 = pad(l1, n2-n1);
+        else if(n2 < n1) l2 = pad(l2, n1-n2);
+        int carry = 0;
+        ListNode* answer = nullptr;
+        addLists(l1, l2, carry, answer);
+        if(carry) {
+            ListNode* temp = new ListNode(carry, answer);
+            answer = temp;
+        }
         return answer;
     }
 };
